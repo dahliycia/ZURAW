@@ -75,7 +75,7 @@ def get_fourier(ex, n, sampFreq):
         temp = sum(fourier[i:i+scale])/scale
         new_fourier.append(temp)
 
-    print len(new_fourier)
+    # print len(new_fourier)
     #
     # plt.plot(new_fourier)
     # plt.show()
@@ -104,12 +104,12 @@ def get_pattern(type_dict):
                 else:
                     temp_pattern.append(example['ex_fourier'][i])
             cnt +=1
-    print 'temp pattern length: ' + str(len(temp_pattern))
+    # print 'temp pattern length: ' + str(len(temp_pattern))
     pattern = []
     for i in temp_pattern:
         pattern.append(i/float(cnt))
-    plt.plot(pattern)
-    plt.show()
+    # plt.plot(pattern)
+    # plt.show()
     save_pattern(pattern, type_dict['name'], 'patterns/')
     return pattern
 
@@ -130,7 +130,6 @@ def find_types():
         for example in os.listdir(type_path):
             ex_dict = get_example(example, type_path)
             type_dict['examples'].append(ex_dict)
-            print example
         type_dict['pattern'] = get_pattern(type_dict)
         types_list.append(type_dict)
     return types_list
@@ -138,8 +137,6 @@ def find_types():
 
 def main():
     types_list = find_types()
-    test_file = get_example('cat_meow2.wav', 'data/')
-
 
 
 if __name__ == '__main__':
