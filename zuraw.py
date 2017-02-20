@@ -1,9 +1,7 @@
 import os
-import wave
 # scipy and numpy for Windows from http://www.lfd.uci.edu/~gohlke/pythonlibs/
 from pylab import *
 from scipy.io import wavfile
-import matplotlib.pyplot as plt
 import scipy.signal
 
 
@@ -75,10 +73,6 @@ def get_fourier(ex, n, sampFreq):
         temp = sum(fourier[i:i+scale])/scale
         new_fourier.append(temp)
 
-    # print len(new_fourier)
-    #
-    # plt.plot(new_fourier)
-    # plt.show()
     return new_fourier
 
 
@@ -104,12 +98,9 @@ def get_pattern(type_dict):
                 else:
                     temp_pattern.append(example['ex_fourier'][i])
             cnt +=1
-    # print 'temp pattern length: ' + str(len(temp_pattern))
     pattern = []
     for i in temp_pattern:
         pattern.append(i/float(cnt))
-    # plt.plot(pattern)
-    # plt.show()
     save_pattern(pattern, type_dict['name'], 'patterns/')
     return pattern
 

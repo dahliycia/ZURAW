@@ -31,7 +31,7 @@ def recognize(my_dict, patterns_dict):
     current_name = 'not_recognized'
     for name, pattern in patterns_dict.items():
         err = measure_similarity(my_dict['ex_fourier'], pattern)
-        print err
+        # print err
         if err < current_smallest_err:
             current_smallest_err = err
             current_name = name
@@ -47,4 +47,6 @@ def main(file_name, file_path):
 
 
 if __name__ == '__main__':
-    main('cow1.wav', 'data/cow/')
+    for test in os.listdir('test/'):
+        print test
+        main(test, 'test/')
