@@ -118,6 +118,14 @@ To smooth out the transform result it is scaled to 100 points by calculating an 
 
 The function returns normalized Fourier transform result as an array of 100 points.
 
+## How it was tested
+
+The program was tested on two sets of samples, each containing 4 animal types.
+
+In first set of samples the samples used for learing were tested, to check if the program will recognize the sounds it learned on. The success rate was 100%.
+
+The second set of samples consisted of new samples for each of 4 categories, and the success rate was 75%.
+
 ## Authors
 
 Olga Borgula (nnnnodahlia@gmail.com)
