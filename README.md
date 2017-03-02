@@ -80,3 +80,44 @@ __Q: I would like to use some methods from ZURAW in my project. What methods can
 ## How it works
 
 In this section you can find how (technically) the most important modules work.
+
+### normalize_data(data, sampFreq)
+
+*data* should be an array of intiger/float numbers, read from the audio file.
+*sampFreq* is the sasmpling frequency of the file.
+
+If two channels are available, ZURAW will only operate on the first one.
+
+Then, if the data is of type *unsigned*, it will convert to signed by subtracting 128.
+
+Data is filtered with a highpass filter implemented in `butter_highpass_filter(data, cutoff, fs)`, with `cutoff` = 30 and `fs = 11025` (this is the frequency we normalize to).
+
+Filtered data is then normalized to fit [-1:1] by finding the maximum absolute value and dividing the array by it.
+
+The sampling frequency is normalized to 11025.
+
+The function returns normalized data as an array.
+
+### get_fourier(data, n, sampFreq)
+
+*data* should be a normalized array of numbers [-1,1]
+*n* should be the number of samples
+*sampFreq* should be the sampling frequency
+
+The Fourier transform is calculated with the __fft(data, norm)__ function from *pylab* library, with `norm = "ortho"`.
+
+Only the first half of the calculated transform is used then, so the latter half, which is only a mirror of the first, is cut off.
+
+Moreover, the program takes the absolute of the transform result, so it operates only on real values.
+
+Then, to increase the likeliness of pattern recognition, the transform result is powered by 2. The very high frequencies, which are only a noise, are cut off by finding a place in the result after which there is no value high enough to be significant - it is set as the maximum value of the result divided by 20.
+
+Then, the result is normalized to range [0:1] by dividing each number by the array maximum.
+
+To smooth out the transform result it is scaled to 100 points by calculating an average for each point.
+
+The function returns normalized Fourier transform result as an array of 100 points.
+
+## Authors
+
+Olga Borgula (nnnnodahlia@gmail.com)
